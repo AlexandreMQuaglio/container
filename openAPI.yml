@@ -31,16 +31,13 @@ tags:
   - name: devolucao
     description: Devolucao de PIX
     
-  - name: detalhes_pgto
-    description: Consulta id do pix e recebe dados bancarios
-    
-  - name: consulta_chaves
+  - name: chave
     description: Consulta chave de pix e recebe dados bancarios
 paths:
   /pagamento:
     post:
       tags:
-        - envio_pgto
+        - pagamento
       summary: Add a new pix
       description: Add a new pix
       operationId: addPix
@@ -73,10 +70,10 @@ paths:
         - petstore_auth:
             - write:pets
             - read:pets
-  /envio_pgto/findByStatus:
+  /pagamento/findByDate:
     get:
       tags:
-        - pet
+        - pagamento
       summary: Finds Pets by status
       description: Multiple status values can be provided with comma separated strings
       operationId: findPetsByStatus
@@ -101,12 +98,12 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/Pet'          
+                  $ref: '#/components/schemas/Pagamento'          
             application/xml:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/Pet'
+                  $ref: '#/components/schemas/Pagamento'
         '400':
           description: Invalid status value
       security:
@@ -138,27 +135,27 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/Pet'          
+                  $ref: '#/components/schemas/Pagamento'          
             application/xml:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/Pet'
+                  $ref: '#/components/schemas/Pagamento'
         '400':
           description: Invalid tag value
       security:
         - petstore_auth:
             - write:pets
             - read:pets
-  /pet/{petId}:
+  /pagamento/{chaveId}:
     get:
       tags:
-        - pet
+        - pagamento
       summary: Find pet by ID
       description: Returns a single pet
       operationId: getPetById
       parameters:
-        - name: petId
+        - name: chaveId
           in: path
           description: ID of pet to return
           required: true
@@ -171,14 +168,14 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Pet'          
+                $ref: '#/components/schemas/Pagamento'          
             application/xml:
               schema:
-                $ref: '#/components/schemas/Pet'
+                $ref: '#/components/schemas/Pagamento'
         '400':
           description: Invalid ID supplied
         '404':
-          description: Pet not found
+          description: Pagamento not found
       security:
         - api_key: []
         - petstore_auth:
@@ -714,10 +711,10 @@ components:
       content:
         application/json:
           schema:
-            $ref: '#/components/schemas/Pet'
+            $ref: '#/components/schemas/Pagamento'
         application/xml:
           schema:
-            $ref: '#/components/schemas/Pet'
+            $ref: '#/components/schemas/Pagamento'
     UserArray:
       description: List of user object
       content:
