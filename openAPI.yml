@@ -74,14 +74,14 @@ paths:
     get:
       tags:
         - pagamento
-      summary: Finds Pets by status
+      summary: Finds pix by date
       description: Multiple status values can be provided with comma separated strings
-      operationId: findPetsByStatus
+      operationId: findPixByDate
       parameters:
-        - name: status
+        - name: date
           in: query
-          description: Status values that need to be considered for filter
-          required: false
+          description: Date values that need to be considered for filter
+          required: true
           explode: true
           schema:
             type: string
@@ -105,11 +105,11 @@ paths:
                 items:
                   $ref: '#/components/schemas/Pagamento'
         '400':
-          description: Invalid status value
+          description: Invalid date value
       security:
         - petstore_auth:
-            - write:pets
-            - read:pets
+            - write:pagamento
+            - read:pagamento
   /envio_pgto/findByTags:
     get:
       tags:
